@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Add mammoth.js for DOCX file processing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.19/mammoth.browser.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar for chat history -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <button id="new-chat-button" class="new-chat-btn">
+                    <i class="fas fa-plus"></i> New Chat
+                </button>
+            </div>
+            <div class="chat-history" id="chat-history">
+                <!-- Chat history items will be added here dynamically -->
+            </div>
+        </div>
+
+        <!-- Main chat area -->
+        <div class="main-content">
+            <!-- In the main-header section, add the theme toggle button -->
+            <!-- In the main-header section, update the buttons -->
+            <header class="main-header">
+                <h1>Scientific Research Summarizer</h1>
+                <div class="chat-actions">
+                    <button id="theme-toggle" class="theme-toggle" title="Toggle dark/light mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button id="auth-button" class="action-btn" title="Sign in/Sign up">
+                        <i class="fas fa-user"></i> Sign in
+                    </button>
+                    <div id="user-icon" class="user-icon" title="Your account" style="display: none;">
+                        <!-- User initial will be added here -->
+                    </div>
+                </div>
+            </header>
+            
+            <div class="chat-container">
+                <div id="chat-display"></div>
+            </div>
+            
+            <!-- Update the input container to include mic button -->
+            <div class="input-container">
+                <textarea id="user-input" placeholder="Enter your research query here..."></textarea>
+                <div class="button-container">
+                    <button id="pdf-button" class="btn">
+                        <i class="fas fa-file"></i> File
+                    </button>
+                    <button id="mic-button" class="btn">
+                        <i class="fas fa-microphone"></i> Voice
+                    </button>
+                    <button id="send-button" class="btn">
+                        <i class="fas fa-paper-plane"></i> Send
+                    </button>
+                </div>
+            </div>
+            
+            <div id="status-bar">Ready</div>
+        </div>
+    </div>
+    
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="auth-modal">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h2 class="auth-title">Sign in to Research Assistant</h2>
+                <button id="close-modal" class="close-modal">&times;</button>
+            </div>
+            <div class="auth-tabs">
+                <div class="auth-tab active" data-tab="signin">Sign In</div>
+                <div class="auth-tab" data-tab="signup">Sign Up</div>
+            </div>
+            <form id="signin-form" class="auth-form active">
+                <div class="form-group">
+                    <label for="signin-email" class="form-label">Email</label>
+                    <input type="email" id="signin-email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="signin-password" class="form-label">Password</label>
+                    <input type="password" id="signin-password" class="form-input" required>
+                </div>
+                <button type="submit" class="auth-submit-btn">Sign In</button>
+                <div id="signin-footer" class="auth-footer">
+                    Don't have an account? <a href="#" id="switch-to-signup">Sign up</a>
+                </div>
+            </form>
+            <form id="signup-form" class="auth-form">
+                <div class="form-group">
+                    <label for="signup-name" class="form-label">Name</label>
+                    <input type="text" id="signup-name" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email" class="form-label">Email</label>
+                    <input type="email" id="signup-email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password" class="form-label">Password</label>
+                    <input type="password" id="signup-password" class="form-input" required>
+                </div>
+                <button type="submit" class="auth-submit-btn">Sign Up</button>
+                <div id="signup-footer" class="auth-footer" style="display: none;">
+                    Already have an account? <a href="#" id="switch-to-signin">Sign in</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Change the file input to accept both PDF and Word files -->
+    <!-- Change the file input to accept images as well -->
+    <input type="file" id="pdf-input" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
+    
+    <!-- Updated PDF.js references -->
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.min.js"></script>
+    <script>
+        // Initialize PDF.js worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.worker.min.js';
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
